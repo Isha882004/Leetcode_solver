@@ -1,20 +1,35 @@
 class Solution {
 public:
     int maxTotalFruits(vector<vector<int>>& fruits, int startPos, int k) {
-        int left = 0, sum = 0, maxFruits = 0;
-        for (int right = 0; right < fruits.size(); ++right) {
-            sum += fruits[right][1];
-            while (left <= right && minSteps(fruits[left][0], fruits[right][0], startPos) > k) {
-                sum -= fruits[left][1];
-                left++;
-            }
-            maxFruits = max(maxFruits, sum);
+      
+    int n = fruits.size();
+    int maxTotal = 0;
+    int total = 0;
+    int l = 0;
+
+    for (int r = 0; r < n; ++r) {
+        total += fruits[r][1];
+
+        // Shrink window from left until within k steps
+        while (l <= r) {
+            int left = fruits[l][0];
+            int right = fruits[r][0];
+
+            int minSteps = min(
+                abs(startPos - left) + (right - left),  // go left first
+                abs(startPos - right) + (right - left)  // go right first
+            );
+
+            if (minSteps <= k) break;
+
+            total -= fruits[l][1];
+            l++;
         }
-        return maxFruits;
+
+        maxTotal = max(maxTotal, total);
     }
 
-    int minSteps(int left, int right, int start) {
-        return min(abs(start - left) + (right - left),
-                   abs(start - right) + (right - left));
+    return maxTotal;
+
     }
 };
