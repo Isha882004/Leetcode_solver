@@ -1,1 +1,1 @@
-<h2>pancake-sorting Notes</h2><hr>[ Time taken: 7 hrs 31 m 47 s ]
+<h2>pancake-sorting Notes</h2><hr>[ Time taken: 11 hrs 9 m 0 s ]
